@@ -11,10 +11,13 @@ import SystemMessage from 'components/shared/system-message';
 import ZeroState from 'components/shared/zero-state';
 import { AppContext } from 'context';
 import { useLocalStorage, useCustomTitle, useToast } from 'hooks';
-import { useViewer, useLatestRepos, useSyncAccount } from 'hooks/swr';
+import {
+  useViewer, useLatestRepos, useSyncAccount, useSystemOverview,
+} from 'hooks/swr';
 
 import { Cards } from './card';
 import styles from './home.module.scss';
+import QueueOverview from './overview';
 import { RepoList } from './repos';
 
 const cx = classNames.bind(styles);
@@ -23,7 +26,7 @@ const cx = classNames.bind(styles);
 // on show more click
 const REPOS_CHUNK_SIZE = 50;
 
-export default function Home() {
+export default function Home({ user }) {
   const [context, setContext] = useContext(AppContext);
   const [showAllRepos, setShowAllRepos] = useState(false);
   const [isActiveOnly, setIsActiveOnly] = useLocalStorage('home_show_active_only_repos', false);
@@ -33,6 +36,10 @@ export default function Home() {
 
   const { data, isLoading, mutate } = useLatestRepos();
   const { isSynced, isSyncing, isError: viewerError } = useViewer({ withPolling: hasSyncReqFiredOff });
+  const {
+    data: overview,
+    isError: overviewError,
+  } = useSystemOverview(!!user?.admin);
 
   useCustomTitle();
 
@@ -172,6 +179,14 @@ export default function Home() {
         )}
       </div>
       <section className={cx('wrapper')}>
+        {!!user?.admin && overview && (
+        <QueueOverview overview={overview} />
+        )}
+        {!!user?.admin && !overview && overviewError && (
+        <div className={cx('overview-error')}>
+          Queue overview is temporarily unavailable.
+        </div>
+        )}
         {!!recent.length && (
         <>
           <h2 className={cx('section-title')}>Recent Activity</h2>
