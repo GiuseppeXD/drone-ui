@@ -31,7 +31,10 @@ export default function QueueOverview({ overview }) {
         <section className={cx('overview-panel')}>
           <div className={cx('overview-panel-header')}>
             <h3>Top Repositories</h3>
-            <span>{overview.top_repos.length} total</span>
+            <span>
+              {overview.top_repos.length}
+              {' total'}
+            </span>
           </div>
           {topRepos.length ? (
             <div className={cx('overview-table')}>
@@ -58,7 +61,10 @@ export default function QueueOverview({ overview }) {
         <section className={cx('overview-panel')}>
           <div className={cx('overview-panel-header')}>
             <h3>Running Builds</h3>
-            <span>{overview.running.length} active stages</span>
+            <span>
+              {overview.running.length}
+              {' active stages'}
+            </span>
           </div>
           {running.length ? (
             <div className={cx('overview-table')}>
@@ -74,7 +80,8 @@ export default function QueueOverview({ overview }) {
                   <Link to={`/${item.slug}`}>{item.slug}</Link>
                   <Link to={`/${item.slug}/${item.build_number}`} className={cx('overview-build-link')}>
                     <Status status={item.status} className={cx('overview-status-icon')} />
-                    #{item.build_number}
+                    {'#'}
+                    {item.build_number}
                   </Link>
                   <span className={cx('overview-stage')}>
                     <StatusBadge status={item.status} className={cx('overview-stage-badge')} />
