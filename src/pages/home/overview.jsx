@@ -28,7 +28,7 @@ export default function QueueOverview({ overview }) {
       </div>
 
       <div className={cx('overview-panels')}>
-        <section className={cx('overview-panel')}>
+        <section className={cx('overview-panel', 'overview-panel-compact')}>
           <div className={cx('overview-panel-header')}>
             <h3>Top Repositories</h3>
             <span>
@@ -58,7 +58,7 @@ export default function QueueOverview({ overview }) {
           )}
         </section>
 
-        <section className={cx('overview-panel')}>
+        <section className={cx('overview-panel', 'overview-panel-wide')}>
           <div className={cx('overview-panel-header')}>
             <h3>Running Builds</h3>
             <span>
@@ -85,9 +85,9 @@ export default function QueueOverview({ overview }) {
                   </Link>
                   <span className={cx('overview-stage')}>
                     <StatusBadge status={item.status} className={cx('overview-stage-badge')} />
-                    {item.stage_name}
+                    <span className={cx('overview-stage-name')}>{item.stage_name}</span>
                   </span>
-                  <span>{item.runner || 'n/a'}</span>
+                  <span className={cx('overview-runner')}>{item.runner || 'n/a'}</span>
                   <span>{formatDistanceStrict(new Date(item.started * 1000), new Date(), { addSuffix: true })}</span>
                 </div>
               ))}
