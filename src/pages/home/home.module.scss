@@ -6,23 +6,28 @@
   }
 }
 
+.section-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 32px 0px 18px 0px;
+  padding-left: 0px;
+  color: #6b6d85;
+  text-transform: uppercase;
+  margin-left: 10px;
+}
+
 .wrapper {
   max-width: 1700px;
   margin: 0px auto;
-
-  .section-title {
-    font-size: 16px;
-    font-weight: 500;
-    margin: 32px 0px 18px 0px;
-    padding-left: 0px;
-    color: #6b6d85;
-    text-transform: uppercase;
-    margin-left: 10px;
-  }
 }
 
 .overview {
-  margin: 8px 10px 0;
+  margin: 8px 0 0;
+}
+
+.overview-wrapper {
+  max-width: 1700px;
+  margin: 0px auto;
 }
 
 .overview-cards {

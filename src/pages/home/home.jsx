@@ -178,15 +178,17 @@ export default function Home({ user }) {
         </SystemMessage>
         )}
       </div>
-      <section className={cx('wrapper')}>
-        {!!user?.admin && overview && (
+      {!!user?.admin && overview && (
+      <section className={cx('overview-wrapper')}>
         <QueueOverview overview={overview} />
-        )}
-        {!!user?.admin && !overview && overviewError && (
-        <div className={cx('overview-error')}>
-          Queue overview is temporarily unavailable.
-        </div>
-        )}
+      </section>
+      )}
+      {!!user?.admin && !overview && overviewError && (
+      <div className={cx('overview-error')}>
+        Queue overview is temporarily unavailable.
+      </div>
+      )}
+      <section className={cx('wrapper')}>
         {!!recent.length && (
         <>
           <h2 className={cx('section-title')}>Recent Activity</h2>
