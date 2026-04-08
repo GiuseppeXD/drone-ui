@@ -179,9 +179,9 @@ export default function Home({ user }) {
         )}
       </div>
       {!!user?.admin && overview && (
-      <section className={cx('overview-wrapper')}>
+      <div className={cx('overview-wrapper')}>
         <QueueOverview overview={overview} />
-      </section>
+      </div>
       )}
       {!!user?.admin && !overview && overviewError && (
       <div className={cx('overview-error')}>

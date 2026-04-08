@@ -87,7 +87,7 @@ export default function QueueOverview({ overview }) {
                     <StatusBadge status={item.status} className={cx('overview-stage-badge')} />
                     <span className={cx('overview-stage-name')}>{item.stage_name}</span>
                   </span>
-                  <span className={cx('overview-runner')}>{item.runner || 'n/a'}</span>
+                  <span className={cx('overview-runner')} title={item.runner || 'n/a'}>{item.runner || 'n/a'}</span>
                   <span>{formatDistanceStrict(new Date(item.started * 1000), new Date(), { addSuffix: true })}</span>
                 </div>
               ))}
