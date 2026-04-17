@@ -152,7 +152,7 @@
 }
 
 .overview-row-running {
-  grid-template-columns: minmax(0, 1.05fr) 92px minmax(0, 1.05fr) minmax(210px, 1.35fr) 110px;
+  grid-template-columns: minmax(0, 1.05fr) 92px 60px minmax(260px, 1.6fr) 110px;
 }
 
 .overview-build-link {
