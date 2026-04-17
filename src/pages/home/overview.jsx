@@ -13,18 +13,21 @@ const MAX_TOP_REPOS = 8;
 const MAX_RUNNING_ROWS = 8;
 
 export default function QueueOverview({ overview }) {
-  const topRepos = overview.top_repos.slice(0, MAX_TOP_REPOS);
-  const running = overview.running.slice(0, MAX_RUNNING_ROWS);
+  const topReposAll = overview?.top_repos ?? [];
+  const runningAll = overview?.running ?? [];
+  const summary = overview?.summary ?? {};
+  const topRepos = topReposAll.slice(0, MAX_TOP_REPOS);
+  const running = runningAll.slice(0, MAX_RUNNING_ROWS);
 
   return (
     <section className={cx('overview')}>
       <h2 className={cx('section-title')}>Queue Overview</h2>
 
       <div className={cx('overview-cards')}>
-        <OverviewCard label="Running Builds" value={overview.summary.running_builds} tone="running" />
-        <OverviewCard label="Queued Builds" value={overview.summary.queued_builds} tone="queued" />
-        <OverviewCard label="Repos Running" value={overview.summary.repos_with_running} tone="neutral" />
-        <OverviewCard label="Repos Queued" value={overview.summary.repos_with_queued} tone="neutral" />
+        <OverviewCard label="Running Builds" value={summary.running_builds ?? 0} tone="running" />
+        <OverviewCard label="Queued Builds" value={summary.queued_builds ?? 0} tone="queued" />
+        <OverviewCard label="Repos Running" value={summary.repos_with_running ?? 0} tone="neutral" />
+        <OverviewCard label="Repos Queued" value={summary.repos_with_queued ?? 0} tone="neutral" />
       </div>
 
       <div className={cx('overview-panels')}>
@@ -32,7 +35,7 @@ export default function QueueOverview({ overview }) {
           <div className={cx('overview-panel-header')}>
             <h3>Top Repositories</h3>
             <span>
-              {overview.top_repos.length}
+              {topReposAll.length}
               {' total'}
             </span>
           </div>
@@ -62,7 +65,7 @@ export default function QueueOverview({ overview }) {
           <div className={cx('overview-panel-header')}>
             <h3>Running Builds</h3>
             <span>
-              {overview.running.length}
+              {runningAll.length}
               {' active stages'}
             </span>
           </div>
