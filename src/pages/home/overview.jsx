@@ -9,15 +9,10 @@ import styles from './home.module.scss';
 
 const cx = classNames.bind(styles);
 
-const MAX_TOP_REPOS = 8;
-const MAX_RUNNING_ROWS = 8;
-
 export default function QueueOverview({ overview }) {
   const topReposAll = overview?.top_repos ?? [];
   const runningAll = overview?.running ?? [];
   const summary = overview?.summary ?? {};
-  const topRepos = topReposAll.slice(0, MAX_TOP_REPOS);
-  const running = runningAll.slice(0, MAX_RUNNING_ROWS);
 
   return (
     <section className={cx('overview')}>
@@ -39,7 +34,7 @@ export default function QueueOverview({ overview }) {
               {' total'}
             </span>
           </div>
-          {topRepos.length ? (
+          {topReposAll.length ? (
             <div className={cx('overview-table')}>
               <div className={cx('overview-row', 'overview-row-head')}>
                 <span>Repository</span>
@@ -47,7 +42,7 @@ export default function QueueOverview({ overview }) {
                 <span>Queued</span>
                 <span>Total</span>
               </div>
-              {topRepos.map((repo) => (
+              {topReposAll.map((repo) => (
                 <div className={cx('overview-row')} key={repo.repo_id}>
                   <Link to={`/${repo.slug}`}>{repo.slug}</Link>
                   <span>{repo.running_builds}</span>
@@ -69,7 +64,7 @@ export default function QueueOverview({ overview }) {
               {' active stages'}
             </span>
           </div>
-          {running.length ? (
+          {runningAll.length ? (
             <div className={cx('overview-table')}>
               <div className={cx('overview-row', 'overview-row-head', 'overview-row-running')}>
                 <span>Repository</span>
@@ -78,7 +73,7 @@ export default function QueueOverview({ overview }) {
                 <span>Runner</span>
                 <span>Started</span>
               </div>
-              {running.map((item) => (
+              {runningAll.map((item) => (
                 <div className={cx('overview-row', 'overview-row-running')} key={item.stage_id}>
                   <Link to={`/${item.slug}`}>{item.slug}</Link>
                   <Link to={`/${item.slug}/${item.build_number}`} className={cx('overview-build-link')}>
